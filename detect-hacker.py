@@ -9,7 +9,7 @@ import time
 import fpformat
 import os
 
-debug = True
+debug = False
 
 # change this to match where your iptables is
 iptables = "/usr/sbin/iptables"
