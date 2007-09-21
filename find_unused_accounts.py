@@ -40,7 +40,7 @@ def get_last_read_mail(finger_result):
         year = int(match.group('year'))
     else:
         guess = True
-        print "Guessing the year"
+        #print "Guessing the year"
         year = datetime.now().year
         match = re.search("((Unread since)|(Mail last read)) (?P<day>\w+)\s+(?P<month>\w+)\s+(?P<date>\d+)\s+(?P<hour>\d+):(?P<minute>\d+)\s+\(\w+\)\s+", finger_result)
 
@@ -52,7 +52,7 @@ def get_last_read_mail(finger_result):
         minute = int(match.group('minute'))
         last_login = datetime(year, month, date, hour, minute)
         if last_login > datetime.now():
-            print "guessed year wrong "
+            #print "guessed year wrong "
             # guessed the year wrong, use last year
             year -= 1
             last_login = datetime(year, month, date, hour, minute)
