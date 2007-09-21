@@ -4,6 +4,10 @@
 
 from optparse import OptionParser
 import mailbox, smtplib, sys, time, string, re
+import check_postfix_queues
+
+# max number of messages
+threshold = 100
 
 def main():
   # do the work  
@@ -26,8 +30,17 @@ def main():
      print fullmsg
      msg = mb.next()
 
-     # should check queue size here
-     time.sleep(1)
+     # check queue size here
+     if "localhost" == smtp_server:
+       (num_active, num_deferred, num_hold) = check_postfix_queues.get_queue_lengths()
+       print "Active: %d Deferred: %d" % (num_active, num_deferred)
+       while num_active + num_deferred > threshold:
+         time.sleep(1)
+         (num_active, num_deferred, num_hold) = check_postfix_queues.get_queue_lengths()
+         print "Active: %d Deferred: %d" % (num_active, num_deferred)
+     else:
+       time.sleep(5)
+       
   server.quit()
 
 if __name__ == "__main__":
