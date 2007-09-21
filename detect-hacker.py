@@ -67,8 +67,9 @@ while not done:
     # hit EOF
     done = True
   else:
-    line_match = re.search('(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*sshd\[\d+\].*Failed password for (?:(?P<invalid>invalid|illegal) user )?(?P<user>\S+) from (?:::ffff:)?(?P<ip>\S+) port', line)
-    if not line_match == None:
+    #line_match = re.search('(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*sshd\[\d+\].*(?:(?P<invalid1>Invalid|Illegal user)|(:?Failed password for (?:(?P<invalid2>invalid|illegal) user )?))(?P<user>\S+) from (?:::ffff:)?(?P<ip>\S+)', line)
+    line_match = re.search('(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*sshd\[\d+\].*(?:(?P<invalid1>(?:Invalid|Illegal) user )|(:?Failed password for (?:(?P<invalid2>invalid|illegal) user )?))(?P<user>\S+) from (?:::ffff:)?(?P<ip>\S+)', line)
+    if line_match:
       # look forward until find a log entry after checkdate
       year = time.localtime().tm_year
          
@@ -85,16 +86,19 @@ while not done:
         if debug:
           print "logentry_date: " + time.strftime('%m/%d/%Y %H:%M:%S', time.gmtime(logentry_date)) + " -> " + fpformat.fix(logentry_date, 0)
         # check if invalid or a system account
-        if line_match.group('invalid') or line_match.group('user') in system_accounts:
+        if line_match.group('invalid1') or line_match.group('invalid2') or line_match.group('user') in system_accounts:
           # increment counter for ip
           ip = line_match.group('ip')
           if debug:
-            print line
+            print "Incrementing counter", ip, "from", line
           if failed_logins.has_key(ip):
             failed_logins[ip] = failed_logins[ip] + 1
           else:
             failed_logins[ip] = 1
-        
+        #else:
+        #  print "Not invalid? invalid:", line_match.group('invalid1'), line_match.group("invalid2"), line
+    #elif re.search('.*sshd', line):
+    #  print "Line doesn't match:", line
 logfile.close()
 
 
