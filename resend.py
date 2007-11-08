@@ -12,9 +12,10 @@ threshold = 100
 def main():
   # do the work  
   mb = mailbox.PortableUnixMailbox(file(options.mailbox))
-  server = smtplib.SMTP(smtp_server)
-  #server.set_debuglevel(1)
+  count = 0
+  errors = 0
   msg = mb.next()
+  count = count + 1
   while msg is not None:
      document = msg.fp.read()
      headers = msg.__str__( )
@@ -25,23 +26,39 @@ def main():
          new_headers += line
          
      fullmsg = new_headers + '\x0a' + document
-     print "Sending mail from", msg.getaddr('From')[1]
-     server.sendmail(msg.getaddr('From')[1], options.email, fullmsg)
-     print fullmsg
-     msg = mb.next()
 
-     # check queue size here
+     try:
+       print "%d Sending mail From: %s on date: %s" % (count, msg.getaddr('From')[1], msg['Date'])
+       server = smtplib.SMTP(smtp_server)
+       server.set_debuglevel(False)
+       server.sendmail(msg.getaddr('From')[1], options.email, fullmsg)
+       server.quit()
+       # for debugging
+       #print fullmsg
+     except:
+       print "Error sending message %d" % (count)
+       print "Exception: ", sys.exc_info()[0]
+       errors = errors + 1
+
+     # check queue size before continuing
      if "localhost" == smtp_server:
        (num_active, num_deferred, num_hold) = check_postfix_queues.get_queue_lengths()
+       sleep_time = 1
        print "Active: %d Deferred: %d" % (num_active, num_deferred)
        while num_active + num_deferred > threshold:
-         time.sleep(1)
+         time.sleep(sleep_time)
          (num_active, num_deferred, num_hold) = check_postfix_queues.get_queue_lengths()
          print "Active: %d Deferred: %d" % (num_active, num_deferred)
+         sleep_time = sleep_time + 1
      else:
        time.sleep(5)
+
+     # go to next message
+     msg = mb.next()
+     count = count + 1
+
        
-  server.quit()
+  print "Attempted to send %d messages, received %d errors" % (count, errors)
 
 if __name__ == "__main__":
   parser = OptionParser()
