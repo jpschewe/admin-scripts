@@ -73,7 +73,8 @@ while not done:
       # look forward until find a log entry after checkdate
       year = time.localtime().tm_year
          
-      logentry_date_str = time.strptime(line_match.group('date'), '%b %d %H:%M:%S');
+      date_str = str(year) + " " + line_match.group('date')
+      logentry_date_str = time.strptime(date_str, '%Y %b %d %H:%M:%S');
       logentry_date = time.mktime( (year, logentry_date_str.tm_mon, logentry_date_str.tm_mday, logentry_date_str.tm_hour, logentry_date_str.tm_min, logentry_date_str.tm_sec, logentry_date_str.tm_wday, -1, -1) )
 
       # adjust for end of year
