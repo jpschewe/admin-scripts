@@ -57,7 +57,7 @@ def main(mb, smtp_server):
      count = count + 1
 
        
-  print "Attempted to send %d messages, received %d errors" % (count, errors)
+  print "Attempted to send %d messages, received %d errors" % (count-1, errors)
 
 if __name__ == "__main__":
   parser = OptionParser()
@@ -81,7 +81,7 @@ if __name__ == "__main__":
   if options.mailbox:
     mb = mailbox.PortableUnixMailbox(file(options.mailbox))
   elif options.maildir:
-    mb = mailbox.Maildir(file(options.maildir))
+    mb = mailbox.Maildir(options.maildir)
   else:
     print "A mailbox must be specified via mailbox or maildir"
     parser.print_help()
