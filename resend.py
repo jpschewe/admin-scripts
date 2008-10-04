@@ -62,17 +62,12 @@ def main(mb, smtp_server):
 if __name__ == "__main__":
   parser = OptionParser()
   parser.add_option("-m", "--mailbox", dest="mailbox", help="mailbox (this or maildir is required)")
-  parser.add_option("-d", "--maildir", dest="mailbox", help="mailbox (this or mailbox is required)")
+  parser.add_option("-d", "--maildir", dest="maildir", help="mailbox (this or mailbox is required)")
   parser.add_option("-e", "--email", dest="email", help="destination email address (required)")
   parser.add_option("-s", "--smtp", dest="smtp", help="smtp server (default: localhost)")
   (options, args) = parser.parse_args()
 
   # check options
-  if options.mailbox == None and options.maildir == None:
-    print "A mailbox must be specified via mailbox or maildir"
-    parser.print_help()
-    sys.exit()
-
   if options.email == None:
     print "An email address must be specified"
     parser.print_help()
@@ -87,5 +82,10 @@ if __name__ == "__main__":
     mb = mailbox.PortableUnixMailbox(file(options.mailbox))
   elif options.maildir:
     mb = mailbox.Maildir(file(options.maildir))
+  else:
+    print "A mailbox must be specified via mailbox or maildir"
+    parser.print_help()
+    sys.exit()
+    
   
   main(mb, smtp_server)
