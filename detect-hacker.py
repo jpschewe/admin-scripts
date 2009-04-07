@@ -36,6 +36,7 @@ if not options.threshold == None:
 
 # keep track of user accounts that count for failed logins
 system_accounts = []
+user_accounts = []
 passwd_file = open('/etc/passwd')
 
 line = passwd_file.readline()
@@ -44,6 +45,8 @@ while not line == '':
   if line_match:
     if not re.search('/home', line_match.group('home')):
       system_accounts.append(line_match.group('user'))
+    else:
+      user_accounts.append(line_match.group('user'))
   line = passwd_file.readline()
 passwd_file.close()
 
@@ -68,7 +71,8 @@ while not done:
     done = True
   else:
     #line_match = re.search('(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*sshd\[\d+\].*(?:(?P<invalid1>Invalid|Illegal user)|(:?Failed password for (?:(?P<invalid2>invalid|illegal) user )?))(?P<user>\S+) from (?:::ffff:)?(?P<ip>\S+)', line)
-    line_match = re.search('(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*sshd\[\d+\].*(?:(?P<invalid1>(?:Invalid|Illegal) user )|(:?Failed password for (?:(?P<invalid2>invalid|illegal) user )?))(?P<user>\S+) from (?:::ffff:)?(?P<ip>\S+)', line)
+
+    line_match = re.search('(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*sshd\[\d+\].*(?:((?:Invalid|Illegal) user )|(:?Failed password for (?:(invalid|illegal) user )?)|(error: PAM: Authentication failure for ))(?P<user>\S+) from (?:::ffff:)?(?P<ip>\S+)', line)
     if line_match:
       # look forward until find a log entry after checkdate
       year = time.localtime().tm_year
@@ -87,7 +91,8 @@ while not done:
         if debug:
           print "logentry_date: " + time.strftime('%m/%d/%Y %H:%M:%S', time.gmtime(logentry_date)) + " -> " + fpformat.fix(logentry_date, 0)
         # check if invalid or a system account
-        if line_match.group('invalid1') or line_match.group('invalid2') or line_match.group('user') in system_accounts:
+        #if line_match.group('invalid1') or line_match.group('invalid2') or line_match.group('user') in system_accounts:
+        if not line_match.group('user') in user_accounts:
           # increment counter for ip
           ip = line_match.group('ip')
           if debug:

@@ -1,0 +1,286 @@
+Apr  7 02:02:09 mtu sshd[26385]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=119.148.64.26  user=root
+Apr  7 02:02:11 mtu sshd[25821]: error: PAM: Authentication failure for root from 119.148.64.26
+Apr  7 02:02:27 mtu sshd[26395]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=philamar.com  user=root
+Apr  7 02:02:29 mtu sshd[26393]: error: PAM: Authentication failure for root from philamar.com
+Apr  7 02:02:59 mtu sshd[26404]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=host-72.vps1-2.nethosting.com  user=root
+Apr  7 02:03:01 mtu sshd[26402]: error: PAM: Authentication failure for root from host-72.vps1-2.nethosting.com
+Apr  7 02:03:42 mtu sshd[26413]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=195.22.103.100  user=root
+Apr  7 02:03:44 mtu sshd[26411]: error: PAM: Authentication failure for root from 195.22.103.100
+Apr  7 02:03:57 mtu sshd[26418]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=coyote.olesno.pl  user=root
+Apr  7 02:03:58 mtu sshd[26414]: error: PAM: Authentication failure for root from coyote.olesno.pl
+Apr  7 02:04:15 mtu sshd[26422]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=77-93-215-158.static.masterinter.net  user=root
+Apr  7 02:04:16 mtu sshd[26420]: error: PAM: Authentication failure for root from 77-93-215-158.static.masterinter.net
+Apr  7 02:04:27 mtu sshd[26425]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=webmail.jknet.com.br  user=root
+Apr  7 02:04:29 mtu sshd[26423]: error: PAM: Authentication failure for root from webmail.jknet.com.br
+Apr  7 02:04:56 mtu sshd[26430]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=74.63.78.70  user=root
+Apr  7 02:04:58 mtu sshd[26428]: error: PAM: Authentication failure for root from 74.63.78.70
+Apr  7 02:05:08 mtu sshd[26470]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=dio.dreamhost.com  user=root
+Apr  7 02:05:10 mtu sshd[26468]: error: PAM: Authentication failure for root from dio.dreamhost.com
+Apr  7 02:05:35 mtu sshd[26480]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=24.64.108.191  user=root
+Apr  7 02:05:37 mtu sshd[26478]: error: PAM: Authentication failure for root from 24.64.108.191
+Apr  7 02:05:57 mtu sshd[26484]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=87.238.173.121  user=root
+Apr  7 02:05:59 mtu sshd[26481]: error: PAM: Authentication failure for root from 87.238.173.121
+Apr  7 02:06:26 mtu sshd[26492]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=190.84.248.231  user=root
+Apr  7 02:06:28 mtu sshd[26490]: error: PAM: Authentication failure for root from 190.84.248.231
+Apr  7 02:07:09 mtu sshd[26500]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=strefa3.pl  user=root
+Apr  7 02:07:12 mtu sshd[26496]: error: PAM: Authentication failure for root from strefa3.pl
+Apr  7 02:07:29 mtu sshd[26503]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=85.92.138.60  user=root
+Apr  7 02:07:31 mtu sshd[26501]: error: PAM: Authentication failure for root from 85.92.138.60
+Apr  7 02:08:24 mtu sshd[26509]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=a.1.de.static.xlhost.com  user=root
+Apr  7 02:08:24 mtu sshd[26508]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=200.178.182.147  user=root
+Apr  7 02:08:26 mtu sshd[26506]: error: PAM: Authentication failure for root from a.1.de.static.xlhost.com
+Apr  7 02:08:26 mtu sshd[26504]: error: PAM: Authentication failure for root from 200.178.182.147
+Apr  7 02:09:05 mtu sshd[26527]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=94.75.242.21  user=root
+Apr  7 02:09:07 mtu sshd[26517]: error: PAM: Authentication failure for root from 94.75.242.21
+Apr  7 02:09:24 mtu sshd[26531]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=193.158.38.135  user=root
+Apr  7 02:09:27 mtu sshd[26529]: error: PAM: Authentication failure for root from 193.158.38.135
+Apr  7 02:09:46 mtu sshd[26540]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=server11.w3media.nl  user=root
+Apr  7 02:09:48 mtu sshd[26538]: error: PAM: Authentication failure for root from server11.w3media.nl
+Apr  7 02:10:00 mtu sshd[26543]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=host.milneco.com  user=root
+Apr  7 02:10:02 mtu sshd[26541]: error: PAM: Authentication failure for root from host.milneco.com
+Apr  7 02:10:29 mtu sshd[26586]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=sprint-65-160-236-155.smf.ragingwire.net  user=root
+Apr  7 02:10:31 mtu sshd[26584]: error: PAM: Authentication failure for root from sprint-65-160-236-155.smf.ragingwire.net
+Apr  7 02:10:53 mtu sshd[26589]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=69.197.151.18  user=root
+Apr  7 02:10:54 mtu sshd[26587]: error: PAM: Authentication failure for root from 69.197.151.18
+Apr  7 02:11:24 mtu sshd[26602]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=200.69.217.177  user=root
+Apr  7 02:11:26 mtu sshd[26597]: error: PAM: Authentication failure for root from 200.69.217.177
+Apr  7 02:11:53 mtu sshd[26605]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=200.87.126.118  user=root
+Apr  7 02:11:54 mtu sshd[26603]: error: PAM: Authentication failure for root from 200.87.126.118
+Apr  7 02:12:03 mtu sshd[26610]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=ppp167-236-48.static.internode.on.net  user=root
+Apr  7 02:12:05 mtu sshd[26608]: error: PAM: Authentication failure for root from ppp167-236-48.static.internode.on.net
+Apr  7 02:12:18 mtu sshd[26618]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=ferry.dprc.gov.ua  user=root
+Apr  7 02:12:20 mtu sshd[26616]: error: PAM: Authentication failure for root from ferry.dprc.gov.ua
+Apr  7 02:12:57 mtu sshd[26625]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=ns1.kendira.com  user=root
+Apr  7 02:12:59 mtu sshd[26623]: error: PAM: Authentication failure for root from ns1.kendira.com
+Apr  7 02:13:04 mtu sshd[26629]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=kaisari.com.br  user=root
+Apr  7 02:13:06 mtu sshd[26626]: error: PAM: Authentication failure for root from kaisari.com.br
+Apr  7 02:13:34 mtu sshd[26634]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=ip-94.124.2.65.durke.net.pl  user=root
+Apr  7 02:13:37 mtu sshd[26632]: error: PAM: Authentication failure for root from ip-94.124.2.65.durke.net.pl
+Apr  7 02:13:53 mtu sshd[26637]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=194.110.67.105  user=root
+Apr  7 02:13:54 mtu sshd[26635]: error: PAM: Authentication failure for root from 194.110.67.105
+Apr  7 02:14:27 mtu sshd[26640]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=91.203.4.144  user=root
+Apr  7 02:14:29 mtu sshd[26638]: error: PAM: Authentication failure for root from 91.203.4.144
+Apr  7 02:14:56 mtu sshd[26647]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=mail.tonerplastics.com  user=root
+Apr  7 02:14:58 mtu sshd[26641]: error: PAM: Authentication failure for root from mail.tonerplastics.com
+Apr  7 02:15:04 mtu sshd[26685]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=adsl-065-082-213-045.sip.jax.bellsouth.net  user=root
+Apr  7 02:15:06 mtu sshd[26653]: error: PAM: Authentication failure for root from adsl-065-082-213-045.sip.jax.bellsouth.net
+Apr  7 02:15:22 mtu sshd[26697]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=220.232.237.50  user=root
+Apr  7 02:15:24 mtu sshd[26692]: error: PAM: Authentication failure for root from 220.232.237.50
+Apr  7 02:15:47 mtu sshd[26713]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=212.174.85.29  user=root
+Apr  7 02:15:48 mtu sshd[26704]: error: PAM: Authentication failure for root from 212.174.85.29
+Apr  7 02:16:08 mtu sshd[26717]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=86.39.132.49  user=root
+Apr  7 02:16:10 mtu sshd[26715]: error: PAM: Authentication failure for root from 86.39.132.49
+Apr  7 02:16:26 mtu sshd[26720]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=server-79.98.135.42.radore.net.tr  user=root
+Apr  7 02:16:28 mtu sshd[26718]: error: PAM: Authentication failure for root from server-79.98.135.42.radore.net.tr
+Apr  7 02:17:02 mtu sshd[26726]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=211.48.193.27  user=root
+Apr  7 02:17:04 mtu sshd[26721]: error: PAM: Authentication failure for root from 211.48.193.27
+Apr  7 02:17:13 mtu sshd[26729]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=202.75.56.30  user=root
+Apr  7 02:17:14 mtu sshd[26727]: error: PAM: Authentication failure for root from 202.75.56.30
+Apr  7 02:17:40 mtu sshd[26733]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=94.75.209.136  user=root
+Apr  7 02:17:42 mtu sshd[26731]: error: PAM: Authentication failure for root from 94.75.209.136
+Apr  7 02:18:02 mtu sshd[26740]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=91.200.141.85  user=root
+Apr  7 02:18:03 mtu sshd[26738]: error: PAM: Authentication failure for root from 91.200.141.85
+Apr  7 02:18:32 mtu sshd[26743]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=217.148.178.177  user=root
+Apr  7 02:18:34 mtu sshd[26741]: error: PAM: Authentication failure for root from 217.148.178.177
+Apr  7 02:18:43 mtu sshd[26749]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=203.194.153.234  user=root
+Apr  7 02:18:45 mtu sshd[26747]: error: PAM: Authentication failure for root from 203.194.153.234
+Apr  7 02:19:14 mtu sshd[26752]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=ip-67-205-112-200.static.privatedns.com  user=root
+Apr  7 02:19:16 mtu sshd[26750]: error: PAM: Authentication failure for root from ip-67-205-112-200.static.privatedns.com
+Apr  7 02:19:34 mtu sshd[26763]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=208.89.209.112  user=root
+Apr  7 02:19:36 mtu sshd[26761]: error: PAM: Authentication failure for root from 208.89.209.112
+Apr  7 02:20:02 mtu sshd[26798]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=92.243.9.13  user=root
+Apr  7 02:20:04 mtu sshd[26792]: error: PAM: Authentication failure for root from 92.243.9.13
+Apr  7 02:20:21 mtu sshd[26838]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=194.110.67.105  user=root
+Apr  7 02:20:24 mtu sshd[26836]: error: PAM: Authentication failure for root from 194.110.67.105
+Apr  7 02:20:49 mtu sshd[26846]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=194.110.67.40  user=root
+Apr  7 02:20:51 mtu sshd[26844]: error: PAM: Authentication failure for root from 194.110.67.40
+Apr  7 02:21:03 mtu sshd[26849]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=210.193.49.89  user=root
+Apr  7 02:21:05 mtu sshd[26847]: error: PAM: Authentication failure for root from 210.193.49.89
+Apr  7 02:21:44 mtu sshd[26859]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=mail.cequipar.com.br  user=root
+Apr  7 02:21:46 mtu sshd[26854]: error: PAM: Authentication failure for root from mail.cequipar.com.br
+Apr  7 02:21:50 mtu sshd[26862]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=72.30.5446.static.theplanet.com  user=root
+Apr  7 02:21:51 mtu sshd[26860]: error: PAM: Authentication failure for root from 72.30.5446.static.theplanet.com
+Apr  7 02:22:26 mtu sshd[26872]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=77.79.101.242  user=root
+Apr  7 02:22:28 mtu sshd[26870]: error: PAM: Authentication failure for root from 77.79.101.242
+Apr  7 02:22:42 mtu sshd[26875]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=211.95.78.66  user=root
+Apr  7 02:22:44 mtu sshd[26873]: error: PAM: Authentication failure for root from 211.95.78.66
+Apr  7 02:23:11 mtu sshd[26878]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=85.17.185.41  user=root
+Apr  7 02:23:13 mtu sshd[26876]: error: PAM: Authentication failure for root from 85.17.185.41
+Apr  7 02:23:26 mtu sshd[26881]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=65.99.200.6  user=root
+Apr  7 02:23:28 mtu sshd[26879]: error: PAM: Authentication failure for root from 65.99.200.6
+Apr  7 02:23:51 mtu sshd[26892]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=d0527062.ptr.provps.com  user=root
+Apr  7 02:23:54 mtu sshd[26890]: error: PAM: Authentication failure for root from d0527062.ptr.provps.com
+Apr  7 02:24:20 mtu sshd[26895]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=122.155.1.174  user=root
+Apr  7 02:24:22 mtu sshd[26893]: error: PAM: Authentication failure for root from 122.155.1.174
+Apr  7 02:24:47 mtu sshd[26904]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=bruval.com.br  user=root
+Apr  7 02:24:49 mtu sshd[26902]: error: PAM: Authentication failure for root from bruval.com.br
+Apr  7 02:25:00 mtu sshd[26907]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=77.243.237.137  user=root
+Apr  7 02:25:02 mtu sshd[26905]: error: PAM: Authentication failure for root from 77.243.237.137
+Apr  7 02:25:28 mtu sshd[26947]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=194.177.97.220  user=root
+Apr  7 02:25:30 mtu sshd[26945]: error: PAM: Authentication failure for root from 194.177.97.220
+Apr  7 02:25:42 mtu sshd[26950]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=laotramitad.org  user=root
+Apr  7 02:25:43 mtu sshd[26948]: error: PAM: Authentication failure for root from laotramitad.org
+Apr  7 02:26:15 mtu sshd[26955]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=springermedia.eu  user=root
+Apr  7 02:26:17 mtu sshd[26953]: error: PAM: Authentication failure for root from springermedia.eu
+Apr  7 02:26:31 mtu sshd[26958]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=server-79.98.135.218.radore.net.tr  user=root
+Apr  7 02:26:32 mtu sshd[26956]: error: PAM: Authentication failure for root from server-79.98.135.218.radore.net.tr
+Apr  7 02:26:48 mtu sshd[26969]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=s1.serverhex.com  user=root
+Apr  7 02:26:50 mtu sshd[26967]: error: PAM: Authentication failure for root from s1.serverhex.com
+Apr  7 02:27:39 mtu sshd[26979]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=216.240.158.94  user=root
+Apr  7 02:27:41 mtu sshd[26977]: error: PAM: Authentication failure for root from 216.240.158.94
+Apr  7 02:28:03 mtu sshd[26982]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=85.17.168.87  user=root
+Apr  7 02:28:05 mtu sshd[26980]: error: PAM: Authentication failure for root from 85.17.168.87
+Apr  7 02:28:27 mtu sshd[26988]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=210.83.80.69  user=root
+Apr  7 02:28:28 mtu sshd[26986]: error: PAM: Authentication failure for root from 210.83.80.69
+Apr  7 02:28:51 mtu sshd[27009]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=s1.oget.pl  user=root
+Apr  7 02:28:53 mtu sshd[27007]: error: PAM: Authentication failure for root from s1.oget.pl
+Apr  7 02:29:40 mtu sshd[27020]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=216.240.158.94  user=root
+Apr  7 02:29:42 mtu sshd[27018]: error: PAM: Authentication failure for root from 216.240.158.94
+Apr  7 02:29:54 mtu sshd[27023]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=203.113.174.19  user=root
+Apr  7 02:29:54 mtu sshd[27028]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=82.78.148.211  user=root
+Apr  7 02:29:55 mtu sshd[27014]: error: PAM: Authentication failure for root from 203.113.174.19
+Apr  7 02:29:56 mtu sshd[27025]: error: PAM: Authentication failure for root from 82.78.148.211
+Apr  7 02:30:42 mtu sshd[27071]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=64.27.18.204  user=root
+Apr  7 02:30:43 mtu sshd[27072]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=mail.unimedmissoes.com.br  user=root
+Apr  7 02:30:43 mtu sshd[27069]: error: PAM: Authentication failure for root from 64.27.18.204
+Apr  7 02:30:45 mtu sshd[27067]: error: PAM: Authentication failure for root from mail.unimedmissoes.com.br
+Apr  7 02:31:11 mtu sshd[27078]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=dsl212-235-44-138.bb.netvision.net.il  user=root
+Apr  7 02:31:13 mtu sshd[27076]: error: PAM: Authentication failure for root from dsl212-235-44-138.bb.netvision.net.il
+Apr  7 02:31:32 mtu sshd[27082]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=91.189.178.201  user=root
+Apr  7 02:31:33 mtu sshd[27079]: error: PAM: Authentication failure for root from 91.189.178.201
+Apr  7 02:31:57 mtu sshd[27085]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=72.11.145.120  user=root
+Apr  7 02:31:59 mtu sshd[27083]: error: PAM: Authentication failure for root from 72.11.145.120
+Apr  7 02:32:57 mtu sshd[27096]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=208.89.208.89  user=root
+Apr  7 02:32:59 mtu sshd[27094]: error: PAM: Authentication failure for root from 208.89.208.89
+Apr  7 02:33:02 mtu sshd[27099]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=omega.bradhost.com  user=root
+Apr  7 02:33:04 mtu sshd[27097]: error: PAM: Authentication failure for root from omega.bradhost.com
+Apr  7 02:33:31 mtu sshd[27107]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=mywed.ru  user=root
+Apr  7 02:33:33 mtu sshd[27105]: error: PAM: Authentication failure for root from mywed.ru
+Apr  7 02:33:51 mtu sshd[27113]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=64.191.75.244  user=root
+Apr  7 02:33:54 mtu sshd[27111]: error: PAM: Authentication failure for root from 64.191.75.244
+Apr  7 02:34:20 mtu sshd[27127]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=81.174.67.20  user=root
+Apr  7 02:34:21 mtu sshd[27119]: error: PAM: Authentication failure for root from 81.174.67.20
+Apr  7 02:34:38 mtu sshd[27148]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=94.75.228.15  user=root
+Apr  7 02:34:41 mtu sshd[27146]: error: PAM: Authentication failure for root from 94.75.228.15
+Apr  7 02:35:06 mtu sshd[27191]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=194.110.67.40  user=root
+Apr  7 02:35:08 mtu sshd[27189]: error: PAM: Authentication failure for root from 194.110.67.40
+Apr  7 02:35:26 mtu sshd[27195]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=mail.torell.pl  user=root
+Apr  7 02:35:28 mtu sshd[27193]: error: PAM: Authentication failure for root from mail.torell.pl
+Apr  7 02:36:01 mtu sshd[27202]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=208.89.208.98  user=root
+Apr  7 02:36:03 mtu sshd[27200]: error: PAM: Authentication failure for root from 208.89.208.98
+Apr  7 02:36:13 mtu sshd[27208]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=216.195.56.227  user=root
+Apr  7 02:36:14 mtu sshd[27205]: error: PAM: Authentication failure for root from 216.195.56.227
+Apr  7 02:36:42 mtu sshd[27217]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=79.171.20.68  user=root
+Apr  7 02:36:44 mtu sshd[27215]: error: PAM: Authentication failure for root from 79.171.20.68
+Apr  7 02:37:07 mtu sshd[27231]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=61-90-185-235.static.asianet.co.th  user=root
+Apr  7 02:37:10 mtu sshd[27226]: error: PAM: Authentication failure for root from 61-90-185-235.static.asianet.co.th
+Apr  7 02:37:43 mtu sshd[27239]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=85.92.138.70  user=root
+Apr  7 02:37:45 mtu sshd[27237]: error: PAM: Authentication failure for root from 85.92.138.70
+Apr  7 02:37:49 mtu sshd[27241]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=mail.expressa.com  user=root
+Apr  7 02:37:52 mtu sshd[27235]: error: PAM: Authentication failure for root from mail.expressa.com
+Apr  7 02:38:13 mtu sshd[27245]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=77-93-215-158.static.masterinter.net  user=root
+Apr  7 02:38:15 mtu sshd[27243]: error: PAM: Authentication failure for root from 77-93-215-158.static.masterinter.net
+Apr  7 02:38:37 mtu sshd[27248]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=94.75.200.152  user=root
+Apr  7 02:38:39 mtu sshd[27246]: error: PAM: Authentication failure for root from 94.75.200.152
+Apr  7 02:38:55 mtu sshd[27256]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=208.89.208.219  user=root
+Apr  7 02:38:57 mtu sshd[27253]: error: PAM: Authentication failure for root from 208.89.208.219
+Apr  7 02:39:15 mtu sshd[27268]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=62.212.74.146  user=root
+Apr  7 02:39:18 mtu sshd[27265]: error: PAM: Authentication failure for root from 62.212.74.146
+Apr  7 02:39:35 mtu sshd[27280]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=vps17.xen01.pelluzzweb.nl  user=root
+Apr  7 02:39:37 mtu sshd[27278]: error: PAM: Authentication failure for root from vps17.xen01.pelluzzweb.nl
+Apr  7 02:40:11 mtu sshd[27334]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=apollo1.szv.tsf.hu  user=root
+Apr  7 02:40:13 mtu sshd[27332]: error: PAM: Authentication failure for root from apollo1.szv.tsf.hu
+Apr  7 02:40:23 mtu sshd[27337]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=77.92.158.46  user=root
+Apr  7 02:40:25 mtu sshd[27335]: error: PAM: Authentication failure for root from 77.92.158.46
+Apr  7 02:40:56 mtu sshd[27349]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=94.103.145.133  user=root
+Apr  7 02:40:58 mtu sshd[27343]: error: PAM: Authentication failure for root from 94.103.145.133
+Apr  7 02:41:45 mtu sshd[27359]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=189.84.236.109  user=root
+Apr  7 02:41:47 mtu sshd[27356]: error: PAM: Authentication failure for root from 189.84.236.109
+Apr  7 02:41:57 mtu sshd[27369]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=94.75.209.136  user=root
+Apr  7 02:41:58 mtu sshd[27367]: error: PAM: Authentication failure for root from 94.75.209.136
+Apr  7 02:42:27 mtu sshd[27375]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=194.110.67.40  user=root
+Apr  7 02:42:29 mtu sshd[27373]: error: PAM: Authentication failure for root from 194.110.67.40
+Apr  7 02:42:42 mtu sshd[27380]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=omega.bradhost.com  user=root
+Apr  7 02:42:44 mtu sshd[27378]: error: PAM: Authentication failure for root from omega.bradhost.com
+Apr  7 02:43:16 mtu sshd[27385]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=mail.recovered.lv  user=root
+Apr  7 02:43:19 mtu sshd[27383]: error: PAM: Authentication failure for root from mail.recovered.lv
+Apr  7 02:43:28 mtu sshd[27388]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=67.222.130.195  user=root
+Apr  7 02:43:31 mtu sshd[27386]: error: PAM: Authentication failure for root from 67.222.130.195
+Apr  7 02:44:04 mtu sshd[27397]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=64.27.3.161  user=root
+Apr  7 02:44:06 mtu sshd[27395]: error: PAM: Authentication failure for root from 64.27.3.161
+Apr  7 02:44:18 mtu sshd[27400]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=212.34.132.43  user=root
+Apr  7 02:44:20 mtu sshd[27398]: error: PAM: Authentication failure for root from 212.34.132.43
+Apr  7 02:45:06 mtu sshd[27514]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=85.17.168.87  user=root
+Apr  7 02:45:08 mtu sshd[27508]: error: PAM: Authentication failure for root from 85.17.168.87
+Apr  7 02:45:39 mtu sshd[27521]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=189.36.143.105  user=root
+Apr  7 02:45:41 mtu sshd[27519]: error: PAM: Authentication failure for root from 189.36.143.105
+Apr  7 02:45:55 mtu sshd[27524]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=oviedo.creaciones.eu  user=root
+Apr  7 02:45:57 mtu sshd[27522]: error: PAM: Authentication failure for root from oviedo.creaciones.eu
+Apr  7 02:46:21 mtu sshd[27535]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=216-235-98-hcc-60.hcc.net  user=root
+Apr  7 02:46:24 mtu sshd[27533]: error: PAM: Authentication failure for root from 216-235-98-hcc-60.hcc.net
+Apr  7 02:46:47 mtu sshd[27540]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=81.21.199.15  user=root
+Apr  7 02:46:49 mtu sshd[27538]: error: PAM: Authentication failure for root from 81.21.199.15
+Apr  7 02:47:25 mtu sshd[27552]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=195.200.82.160  user=root
+Apr  7 02:47:25 mtu sshd[27553]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=202.78.227.14  user=root
+Apr  7 02:47:27 mtu sshd[27550]: error: PAM: Authentication failure for root from 195.200.82.160
+Apr  7 02:47:27 mtu sshd[27548]: error: PAM: Authentication failure for root from 202.78.227.14
+Apr  7 02:47:59 mtu sshd[27556]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=e-friends.pl  user=root
+Apr  7 02:48:01 mtu sshd[27554]: error: PAM: Authentication failure for root from e-friends.pl
+Apr  7 02:48:28 mtu sshd[27564]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=202.109.175.20  user=root
+Apr  7 02:48:30 mtu sshd[27561]: error: PAM: Authentication failure for root from 202.109.175.20
+Apr  7 02:48:54 mtu sshd[27569]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=correo.texsa.cl  user=root
+Apr  7 02:48:56 mtu sshd[27567]: error: PAM: Authentication failure for root from correo.texsa.cl
+Apr  7 02:49:34 mtu sshd[27576]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=220.232.237.55  user=root
+Apr  7 02:49:36 mtu sshd[27574]: error: PAM: Authentication failure for root from 220.232.237.55
+Apr  7 02:49:50 mtu sshd[27582]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=ns20.q-evo.com  user=root
+Apr  7 02:49:51 mtu sshd[27578]: error: PAM: Authentication failure for root from ns20.q-evo.com
+Apr  7 02:50:09 mtu sshd[27623]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=93.100.163.116  user=root
+Apr  7 02:50:11 mtu sshd[27620]: error: PAM: Authentication failure for root from 93.100.163.116
+Apr  7 02:50:26 mtu sshd[27630]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=78.110.166.165  user=root
+Apr  7 02:50:28 mtu sshd[27626]: error: PAM: Authentication failure for root from 78.110.166.165
+Apr  7 02:50:40 mtu sshd[27635]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=kaisari.com.br  user=root
+Apr  7 02:50:42 mtu sshd[27633]: error: PAM: Authentication failure for root from kaisari.com.br
+Apr  7 02:50:56 mtu sshd[27639]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=server-79.98.135.74.radore.net.tr  user=root
+Apr  7 02:50:59 mtu sshd[27637]: error: PAM: Authentication failure for root from server-79.98.135.74.radore.net.tr
+Apr  7 02:51:24 mtu sshd[27643]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=94.75.205.145  user=root
+Apr  7 02:51:26 mtu sshd[27641]: error: PAM: Authentication failure for root from 94.75.205.145
+Apr  7 02:51:51 mtu sshd[27646]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=210.83.80.69  user=root
+Apr  7 02:51:53 mtu sshd[27644]: error: PAM: Authentication failure for root from 210.83.80.69
+Apr  7 02:52:35 mtu sshd[27655]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=193.218.155.37  user=root
+Apr  7 02:52:37 mtu sshd[27653]: error: PAM: Authentication failure for root from 193.218.155.37
+Apr  7 02:53:22 mtu sshd[27660]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=196.111.181.58.dynamic.max.com.pk  user=root
+Apr  7 02:53:24 mtu sshd[27658]: error: PAM: Authentication failure for root from 196.111.181.58.dynamic.max.com.pk
+Apr  7 02:54:36 mtu sshd[27671]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=194.177.98.147  user=root
+Apr  7 02:54:37 mtu sshd[27672]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=mail.server.homestyle.ru  user=root
+Apr  7 02:54:38 mtu sshd[27669]: error: PAM: Authentication failure for root from 194.177.98.147
+Apr  7 02:54:39 mtu sshd[27667]: error: PAM: Authentication failure for root from mail.server.homestyle.ru
+Apr  7 02:54:54 mtu sshd[27675]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=echo.basicprototype.com  user=root
+Apr  7 02:54:56 mtu sshd[27673]: error: PAM: Authentication failure for root from echo.basicprototype.com
+Apr  7 02:55:22 mtu sshd[27719]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=94.75.214.151  user=root
+Apr  7 02:55:24 mtu sshd[27717]: error: PAM: Authentication failure for root from 94.75.214.151
+Apr  7 02:55:41 mtu sshd[27723]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=host.milneco.com  user=root
+Apr  7 02:55:42 mtu sshd[27721]: error: PAM: Authentication failure for root from host.milneco.com
+Apr  7 02:56:15 mtu sshd[27737]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=208.115.33.121  user=root
+Apr  7 02:56:17 mtu sshd[27735]: error: PAM: Authentication failure for root from 208.115.33.121
+Apr  7 02:56:37 mtu sshd[27740]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=apolo.uermp.cu  user=root
+Apr  7 02:56:39 mtu sshd[27738]: error: PAM: Authentication failure for root from apolo.uermp.cu
+Apr  7 02:57:08 mtu sshd[27746]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=64.125.185.57  user=root
+Apr  7 02:57:10 mtu sshd[27744]: error: PAM: Authentication failure for root from 64.125.185.57
+Apr  7 02:57:18 mtu sshd[27755]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=dsl212-235-44-138.bb.netvision.net.il  user=root
+Apr  7 02:57:20 mtu sshd[27753]: error: PAM: Authentication failure for root from dsl212-235-44-138.bb.netvision.net.il
+Apr  7 02:58:15 mtu sshd[27766]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=194.110.67.105  user=root
+Apr  7 02:58:16 mtu sshd[27764]: error: PAM: Authentication failure for root from 194.110.67.105
+Apr  7 02:58:33 mtu sshd[27772]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=195.184.65.178  user=root
+Apr  7 02:58:35 mtu sshd[27769]: error: PAM: Authentication failure for root from 195.184.65.178
+Apr  7 02:59:26 mtu sshd[27789]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=92.243.13.157  user=root
+Apr  7 02:59:28 mtu sshd[27786]: error: PAM: Authentication failure for root from 92.243.13.157
+Apr  7 02:59:48 mtu sshd[27799]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=83.149.71.77  user=root
+Apr  7 02:59:50 mtu sshd[27796]: error: PAM: Authentication failure for root from 83.149.71.77
+Apr  7 03:00:16 mtu sshd[27839]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=ip-94.124.2.65.durke.net.pl  user=root
+Apr  7 03:00:18 mtu sshd[27837]: error: PAM: Authentication failure for root from ip-94.124.2.65.durke.net.pl
+Apr  7 03:00:40 mtu sshd[27842]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=61.19.246.92  user=root
+Apr  7 03:00:41 mtu sshd[27840]: error: PAM: Authentication failure for root from 61.19.246.92
+Apr  7 03:01:06 mtu sshd[27845]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=202.142.220.96  user=root
+Apr  7 03:01:09 mtu sshd[27843]: error: PAM: Authentication failure for root from 202.142.220.96
+Apr  7 03:01:37 mtu sshd[27848]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=200.27.87.42  user=root
+Apr  7 03:01:38 mtu sshd[27846]: error: PAM: Authentication failure for root from 200.27.87.42
