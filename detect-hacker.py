@@ -108,6 +108,19 @@ while not done:
 logfile.close()
 
 
+# read in existing hackers file & delete those IPs from the list of new
+# hackers
+hackers = open('/etc/hackers', 'r')
+for line in hackers:
+  line_match = re.match(r'# Automatically blocked (?P<ip>[\d.:A-F]+) on', line)
+  if line_match:
+    if failed_logins.has_key(line_match.group('ip')):
+      if debug:
+        print("Removing " + line_match.group('ip'))
+      del failed_logins[line_match.group('ip')]
+hackers.close()
+
+
 # walk over counters and any counter over threshold gets banned
 for ip, count in failed_logins.iteritems():
   if count > threshold:
