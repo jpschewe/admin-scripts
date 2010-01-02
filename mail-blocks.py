@@ -46,7 +46,7 @@ def find_blocked_mail():
 
         user = line_match.group("to").lower().split('@')[0]
         if not re.match("[A-Z0-9._%-]+", user, re.IGNORECASE):
-          print "Invalid user found in to list", user, ", skipping"
+          #print "Invalid user found in to list", user, ", skipping"
           continue
         
         if not blocked_mail.has_key(user):
@@ -121,7 +121,10 @@ if __name__ == "__main__":
     if options.debug:
       print msg
     else:
-      smtp.sendmail(options.contact, [blocked_mail.email], msg.as_string())
+      try:
+        smtp.sendmail(options.contact, [blocked_mail.email], msg.as_string())
+      except: 
+        print "Error sending message to %s, will continue with next recipient" % (blocked_mail.email)
     
   msg = MIMEText(summary_mail_body)
   msg['Subject'] = 'Summary Digest of blocked email on mtu.net'
