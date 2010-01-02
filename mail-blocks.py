@@ -90,8 +90,6 @@ def find_blocked_mail():
             blocked_mail[user].virus.append(dropped_message)
           else:
             blocked_mail[user].other.append(dropped_message)
-      else:
-        print "No match " + line + "\n"
   logfile.close()
 
   
