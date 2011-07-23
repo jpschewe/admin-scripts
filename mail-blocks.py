@@ -10,6 +10,22 @@ import os.path
 
 base_virus_dir='/var/lib/amavis/virusmails'
 
+# keep track of user accounts that count for failed logins
+system_accounts = []
+user_accounts = []
+passwd_file = open('/etc/passwd')
+
+line = passwd_file.readline()
+while not line == '':
+  line_match = re.search('^(?P<user>[^:]+):[^:]*:[^:]*:[^:]*:[^:]*:(?P<home>[^:]*)', line)
+  if line_match:
+    if not re.search('/home', line_match.group('home')):
+      system_accounts.append(line_match.group('user'))
+    else:
+      user_accounts.append(line_match.group('user'))
+  line = passwd_file.readline()
+passwd_file.close()
+
 class DroppedMessage:
   '''Information about a particular message that was dropped'''
   def __init__(self):
@@ -115,6 +131,8 @@ if __name__ == "__main__":
   # print out a summary
   summary_mail_body = ""
   for k, blocked_mail in blocked_mail.iteritems():
+    if not blocked_mail.email in user_accounts:
+      continue
     summary_mail_body += blocked_mail.email + "\n"
     mail_body = ""
     mail_body += "\n".join(textwrap.wrap("This is a digest of the mail blocked for your email account over the past 24 hours.  Each line contains the date the messages was recived, the email address it was sent from, then subject and the filename where the message is quarantined.  If you would like the message recovered, contact " + options.contact + " with the name line indicating which message to recover.  All blocked messages will be deleted after 30 days.  In most cases you can just ignore these messages, however this digest is sent out in case messages are incorrectly blocked."))
@@ -158,14 +176,14 @@ if __name__ == "__main__":
       except: 
         print "Error sending message to %s, will continue with next recipient" % (blocked_mail.email)
     
-  msg = MIMEText(summary_mail_body)
-  msg['Subject'] = 'Summary Digest of blocked email on mtu.net'
-  msg['From'] = options.contact
-  msg['To'] = options.contact
-  if options.debug:
-    print msg
-  else:
-    smtp.sendmail(options.contact, [options.contact], msg.as_string())
+  #summary msg = MIMEText(summary_mail_body)
+  #summary msg['Subject'] = 'Summary Digest of blocked email on mtu.net'
+  #summary msg['From'] = options.contact
+  #summary msg['To'] = options.contact
+  #summary if options.debug:
+  #summary   print msg
+  #summary else:
+  #summary   smtp.sendmail(options.contact, [options.contact], msg.as_string())
   
   smtp.close()
   
