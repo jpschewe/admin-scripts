@@ -38,6 +38,20 @@ class IntervalInfo:
     def getNumMailLogins(self):
         return self.numMailLogins
 
+    def addSshLogin(self, site):
+        print "Adding ssh login to %s for %s" % (self.username, site)
+        self.numSshLogins = self.numSshLogins + 1
+        if site in self.sshSites:
+            self.sshSites[site] = self.sshSites[site] + 1
+        else:
+            self.sshSites[site] = 1
+
+    def getNumSshSites(self):
+        return len(self.sshSites)
+
+    def getNumSshLogins(self):
+        return self.numSshLogins
+
 intervals = {}
 def getIntervals(username):
     '''
@@ -73,6 +87,27 @@ def processMailLog(intervalStart, intervalEnd, mailLog):
         if intervalStart <= logentry_date and logentry_date < intervalEnd:
             interval = getInterval(match.group('user'), logentry_date)
             interval.addMailLogin(match.group('ip'))
+
+def processSshLog(intervalStart, intervalEnd, mailLog):
+    for line in file(mailLog):
+        match = re.match(r'(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*sshd.*: Accepted.*for (?P<user>\S+) from (?P<ip>\S+)', line)
+        if not match:
+            continue
+        
+        # look forward until find a log entry after checkdate
+        year = time.localtime().tm_year
+        date_str = str(year) + " " + match.group('date')
+        logentry_date_str = time.strptime(date_str, '%Y %b %d %H:%M:%S');
+        logentry_date = datetime(year, logentry_date_str.tm_mon, logentry_date_str.tm_mday)
+
+        # adjust for end of year
+        if(time.localtime().tm_mon < logentry_date.month):
+            year = year - 1
+            logentry_date = datetime(year, logentry_date.month, logentry_date.day)
+
+        if intervalStart <= logentry_date and logentry_date < intervalEnd:
+            interval = getInterval(match.group('user'), logentry_date)
+            interval.addSshLogin(match.group('ip'))
 
 def loadData(datafile):
     if os.path.exists(datafile):
@@ -121,6 +156,10 @@ def main(argv=None):
     if options.mail_log:
         for log in options.mail_log:
             processMailLog(intervalStart, intervalEnd, log)
+            
+    if options.ssh_log:
+        for log in options.ssh_log:
+            processSshLog(intervalStart, intervalEnd, log)
 
     saveData(options.datafile)
     
@@ -129,7 +168,7 @@ def main(argv=None):
         print username
         dayIntervals = getIntervals(username)
         for day, interval in dayIntervals.iteritems():
-            print "  %s numLogins: %d numSites: %d" % (day, interval.getNumMailLogins(), interval.getNumMailSites())
+            print "  %s numLogins: %d numSites: %d sshLogins: %d sshSites: %d" % (day, interval.getNumMailLogins(), interval.getNumMailSites(), interval.getNumSshLogins(), interval.getNumSshSites())
         
 if __name__ == "__main__":
     sys.exit(main())
