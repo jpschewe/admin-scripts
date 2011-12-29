@@ -7,7 +7,11 @@ with warnings.catch_warnings():
     from datetime import datetime
     import re
     import time
+    import pickle
+    import os.path
 
+DATE_FORMAT = '%Y%m%d'
+    
 class IntervalInfo:
     '''
     Information about a user for a given day.
@@ -69,7 +73,20 @@ def processMailLog(intervalStart, intervalEnd, mailLog):
         if intervalStart <= logentry_date and logentry_date < intervalEnd:
             interval = getInterval(match.group('user'), logentry_date)
             interval.addMailLogin(match.group('ip'))
-    
+
+def loadData(datafile):
+    if os.path.exists(datafile):
+        print "Loading data"
+        f = file(datafile)
+        i = pickle.load(f)
+        f.close()
+        intervals.update(i)
+
+def saveData(datafile):
+    output = file(datafile, 'w')
+    pickle.dump(intervals, output, 2)
+    output.close()
+
 def main(argv=None):
     if argv is None:
         argv = sys.argv
@@ -79,6 +96,7 @@ def main(argv=None):
     parser.add_option("-m", "--mail", dest="mail_log", action="append", help="mail logfile")
     parser.add_option("-b", "--interval-begin", dest="interval_begin", help="Begin of interval to analyze [YYYYmmdd] (required)")
     parser.add_option("-e", "--interval-end", dest="interval_end", help="End of interval to analyze [YYYYmmdd] (required)")
+    parser.add_option("-d", "--data", dest="datafile", help="The datafile to store the data in and load from (required)")
 
     (options, args) = parser.parse_args(argv)
     if not options.interval_begin:
@@ -89,15 +107,24 @@ def main(argv=None):
         print "Interval end must be specified"
         parser.print_help()
         sys.exit(1)
+    if not options.datafile:
+        print "Datafile must be specified"
+        parser.print_help()
+        sys.exit(1)
 
-    intervalStart = datetime.strptime(options.interval_begin, "%Y%m%d")
-    intervalEnd = datetime.strptime(options.interval_end, "%Y%m%d")
+    loadData(options.datafile)
+
+    intervalStart = datetime.strptime(options.interval_begin, DATE_FORMAT)
+    intervalEnd = datetime.strptime(options.interval_end, DATE_FORMAT)
     print "Processing over interval [%s, %s)" % (intervalStart, intervalEnd)
 
-    for log in options.mail_log:
-        processMailLog(intervalStart, intervalEnd, log)
+    if options.mail_log:
+        for log in options.mail_log:
+            processMailLog(intervalStart, intervalEnd, log)
 
-    #debug
+    saveData(options.datafile)
+    
+    # DEBUG
     for username in intervals.keys():
         print username
         dayIntervals = getIntervals(username)
