@@ -39,7 +39,7 @@ class IntervalInfo:
         return self.numMailLogins
 
     def addSshLogin(self, site):
-        print "Adding ssh login to %s for %s" % (self.username, site)
+        #print "Adding ssh login to %s for %s" % (self.username, site)
         self.numSshLogins = self.numSshLogins + 1
         if site in self.sshSites:
             self.sshSites[site] = self.sshSites[site] + 1
@@ -66,6 +66,9 @@ def getInterval(username, day):
     if day not in dayIntervals:
         dayIntervals[day] = IntervalInfo(username, day)
     return dayIntervals[day]
+
+def getKnownUsers():
+    return intervals.keys()
 
 def processMailLog(intervalStart, intervalEnd, mailLog):
     for line in file(mailLog):
@@ -164,7 +167,7 @@ def main(argv=None):
     saveData(options.datafile)
     
     # DEBUG
-    for username in intervals.keys():
+    for username in getKnownUsers():
         print username
         dayIntervals = getIntervals(username)
         for day, interval in dayIntervals.iteritems():
