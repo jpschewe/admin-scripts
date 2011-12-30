@@ -9,8 +9,36 @@ with warnings.catch_warnings():
     import time
     import pickle
     import os.path
+    import math
 
 DATE_FORMAT = '%Y%m%d'
+
+class Stats:
+    '''
+    Keep track of some statistics
+    '''
+    def __init__(self):
+        self.sum = 0
+        self.count = 0
+        self.sumSquares = 0
+
+    def addData(self, value):
+        self.sum = self.sum + value
+        self.count = self.count + 1
+        self.sumSquares = self.sumSquares + (value * value)
+
+    def average(self):
+        if self.count == 0:
+            return 0
+        else:
+            return self.sum / self.count
+
+    def stddev(self):
+        if self.count < 2:
+            return 0
+        else:
+            average = self.average()
+            return math.sqrt(1 / (self.count - 1) * (self.sumSquares - (self.count * average * average)))
     
 class IntervalInfo:
     '''
@@ -72,7 +100,7 @@ def getKnownUsers():
 
 def processMailLog(intervalStart, intervalEnd, mailLog):
     for line in file(mailLog):
-        match = re.match(r'(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*postfix/smtpd.*: client=\S+\[(?P<ip>[^\]]+)\],.*sasl_username=(?P<user>\S+)', line)
+        match = re.match(r'(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*postfix/smtpd.*: client=\S+\[(?P<ip>[^\]]+)\],.*sasl_username=(?P<user>[a-zA-Z0-9_\-.%+]+)', line)
         if not match:
             continue
         
@@ -112,9 +140,23 @@ def processSshLog(intervalStart, intervalEnd, mailLog):
             interval = getInterval(match.group('user'), logentry_date)
             interval.addSshLogin(match.group('ip'))
 
+def analyzeData(username, intervalStart, intervalEnd):
+    mailLogin = Stats()
+    mailLoginInterval = Stats()
+    
+    for day, interval in getIntervals(username).iteritems():
+        if intervalStart <= day and day < intervalEnd:
+            mailLoginInterval.addData(interval.getNumMailLogins())
+        else:
+            mailLogin.addData(interval.getNumMailLogins())
+
+    print "Average: %d interval average: %d" % (mailLogin.average(), mailLoginInterval.average())
+    
+    if mailLogin.average() > 0 and math.fabs(mailLoginInterval.average() - mailLogin.average()) > (2 * mailLogin.stddev()):
+        print "Number of mail logins is outside of profile for %s: %d normal: %d" % (username, mailLoginInterval.average(), mailLogin.average())
+
 def loadData(datafile):
     if os.path.exists(datafile):
-        print "Loading data"
         f = file(datafile)
         i = pickle.load(f)
         f.close()
@@ -130,8 +172,6 @@ def main(argv=None):
         argv = sys.argv
 
     parser = OptionParser()
-    parser.add_option("-s", "--ssh", dest="ssh_log", action="append", help="ssh logfile")
-    parser.add_option("-m", "--mail", dest="mail_log", action="append", help="mail logfile")
     parser.add_option("-b", "--interval-begin", dest="interval_begin", help="Begin of interval to analyze [YYYYmmdd] (required)")
     parser.add_option("-e", "--interval-end", dest="interval_end", help="End of interval to analyze [YYYYmmdd] (required)")
     parser.add_option("-d", "--data", dest="datafile", help="The datafile to store the data in and load from (required)")
@@ -156,22 +196,20 @@ def main(argv=None):
     intervalEnd = datetime.strptime(options.interval_end, DATE_FORMAT)
     print "Processing over interval [%s, %s)" % (intervalStart, intervalEnd)
 
-    if options.mail_log:
-        for log in options.mail_log:
+    if args:
+        for log in args:
             processMailLog(intervalStart, intervalEnd, log)
-            
-    if options.ssh_log:
-        for log in options.ssh_log:
             processSshLog(intervalStart, intervalEnd, log)
 
-    saveData(options.datafile)
+    if args:
+        saveData(options.datafile)
     
-    # DEBUG
     for username in getKnownUsers():
-        print username
-        dayIntervals = getIntervals(username)
-        for day, interval in dayIntervals.iteritems():
-            print "  %s numLogins: %d numSites: %d sshLogins: %d sshSites: %d" % (day, interval.getNumMailLogins(), interval.getNumMailSites(), interval.getNumSshLogins(), interval.getNumSshSites())
+        #print username
+        analyzeData(username, intervalStart, intervalEnd)
+
+        #for day, interval in getIntervals(username).iteritems():
+        #    print "%s - %d" % (day, interval.getNumMailLogins())
         
 if __name__ == "__main__":
     sys.exit(main())
