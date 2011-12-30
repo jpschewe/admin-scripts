@@ -208,6 +208,7 @@ def main(argv=None):
     parser.add_option("-b", "--interval-begin", dest="interval_begin", help="Begin of interval to analyze [YYYYmmdd] (required)")
     parser.add_option("-e", "--interval-end", dest="interval_end", help="End of interval to analyze [YYYYmmdd] (required)")
     parser.add_option("-d", "--data", dest="datafile", help="The datafile to store the data in and load from (required)")
+    parser.add_option("-q", "--quiet", dest="quiet", action="store_true", help="Quiet output")
 
     (options, args) = parser.parse_args(argv)
     if not options.interval_begin:
@@ -227,7 +228,8 @@ def main(argv=None):
 
     intervalStart = datetime.strptime(options.interval_begin, DATE_FORMAT)
     intervalEnd = datetime.strptime(options.interval_end, DATE_FORMAT)
-    print "Processing over interval [%s, %s)" % (intervalStart, intervalEnd)
+    if not options.quiet:
+        print "Processing over interval [%s, %s)" % (intervalStart, intervalEnd)
 
     if args:
         for log in args:
