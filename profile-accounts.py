@@ -10,6 +10,7 @@ with warnings.catch_warnings():
     import pickle
     import os.path
     import math
+    import gzip
 
 DATE_FORMAT = '%Y%m%d'
 
@@ -98,8 +99,17 @@ def getInterval(username, day):
 def getKnownUsers():
     return intervals.keys()
 
+def openFile(filename):
+    '''
+    If the file ends with ".gz", then open with gzip module, otherwise open directly
+    '''
+    if filename.endswith('.gz'):
+        return gzip.open(filename, 'rb')
+    else:
+        return file(filename)
+    
 def processMailLog(intervalStart, intervalEnd, mailLog):
-    for line in file(mailLog):
+    for line in openFile(mailLog):
         match = re.match(r'(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*postfix/smtpd.*: client=\S+\[(?P<ip>[^\]]+)\],.*sasl_username=(?P<user>[a-zA-Z0-9_\-.%+]+)', line)
         if not match:
             continue
@@ -120,7 +130,7 @@ def processMailLog(intervalStart, intervalEnd, mailLog):
             interval.addMailLogin(match.group('ip'))
 
 def processSshLog(intervalStart, intervalEnd, mailLog):
-    for line in file(mailLog):
+    for line in openFile(mailLog):
         match = re.match(r'(?P<date>[A-Z][a-z][a-z]\s{1,2}\d{1,2}\s\d{2}:\d{2}:\d{2}).*sshd.*: Accepted.*for (?P<user>\S+) from (?P<ip>\S+)', line)
         if not match:
             continue
