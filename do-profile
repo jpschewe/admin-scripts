@@ -1,0 +1,31 @@
+#!/bin/sh
+
+debug() { ! "${log_debug-false}" || log "DEBUG: $*" >&2; }
+log() { printf '%s\n' "$*"; }
+warn() { log "WARNING: $*" >&2; }
+error() { log "ERROR: $*" >&2; }
+fatal() { error "$*"; exit 1; }
+
+mydir=$(cd "$(dirname "$0")" && pwd -L) || fatal "Unable to determine script directory"
+
+if [ $# -ne 1 ]; then
+    fatal "You must specify the datafile to use"
+fi
+datafile=$1
+
+dateFormat='%Y%m%d'
+
+logs=''
+for day in 0 1 2 3 4 5 6; do
+    dayDate=$(date -d "${day} days ago" +${dateFormat})
+    dayLogs="/var/log/auth.log.${dayDate}* /var/log/mail.info.${dayDate}*"
+    logs="${logs} ${dayLogs}"
+done
+
+${mydir}/profile-accounts.py \
+    -q \
+    -d ${datafile} \
+    -b $(date -d "6 days ago" +${dateFormat}) \
+    -e $(date -d "0 days ago" +${dateFormat}) \
+    $(ls ${logs})
+    
