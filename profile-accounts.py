@@ -150,6 +150,17 @@ def processSshLog(intervalStart, intervalEnd, mailLog):
             interval = getInterval(match.group('user'), logentry_date)
             interval.addSshLogin(match.group('ip'))
 
+def outsideProfile(average, stddev, intervalAverage):
+    '''
+    Check if the data is outside profile.
+    '''
+    if intervalAverage > 0 and average == 0:
+        return True
+    elif average > 0 and math.fabs(intervalAverage - average) > (2 * stddev):
+        return True
+    else:
+        return False
+    
 def analyzeData(username, intervalStart, intervalEnd, verbose):
     mailLogin = Stats()
     mailLoginInterval = Stats()
@@ -182,11 +193,11 @@ def analyzeData(username, intervalStart, intervalEnd, verbose):
 
     if outsideProfile(mailLogin.average(), mailLogin.stddev(), mailLoginInterval.average()):
         print "Number of mail logins is outside of profile for %s: %d normal: %d" % (username, mailLoginInterval.average(), mailLogin.average())
-    if mailSites.average() > 0 and math.fabs(mailSitesInterval.average() - mailSites.average()) > (2 * mailSites.stddev()):
+    if outsideProfile(mailSites.average(), mailSites.stddev(), mailSitesInterval.average()):
         print "Number of mail sites is outside of profile for %s: %d normal: %d" % (username, mailSitesInterval.average(), mailSites.average())
-    if sshLogin.average() > 0 and math.fabs(sshLoginInterval.average() - sshLogin.average()) > (2 * sshLogin.stddev()):
+    if outsideProfile(sshLogin.average(), sshLogin.stddev(), sshLoginInterval.average()):
         print "Number of ssh logins is outside of profile for %s: %d normal: %d" % (username, sshLoginInterval.average(), sshLogin.average())
-    if sshSites.average() > 0 and math.fabs(sshSitesInterval.average() - sshSites.average()) > (2 * sshSites.stddev()):
+    if outsideProfile(sshSites.average(), sshSites.stddev(), sshSitesInterval.average()):
         print "Number of ssh sites is outside of profile for %s: %d normal: %d" % (username, sshSitesInterval.average(), sshSites.average())
 
 def loadData(datafile):
