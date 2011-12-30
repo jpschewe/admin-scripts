@@ -143,17 +143,40 @@ def processSshLog(intervalStart, intervalEnd, mailLog):
 def analyzeData(username, intervalStart, intervalEnd):
     mailLogin = Stats()
     mailLoginInterval = Stats()
-    
+    mailSites = Stats()
+    mailSitesInterval = Stats()
+    sshLogin = Stats()
+    sshLoginInterval = Stats()
+    sshSites = Stats()
+    sshSitesInterval = Stats()
+
+    #print username
     for day, interval in getIntervals(username).iteritems():
+        #    print "%s - %d" % (day, interval.getNumMailLogins())
         if intervalStart <= day and day < intervalEnd:
             mailLoginInterval.addData(interval.getNumMailLogins())
+            mailSitesInterval.addData(interval.getNumMailSites())
+            sshLoginInterval.addData(interval.getNumSshLogins())
+            sshSitesInterval.addData(interval.getNumSshSites())
         else:
             mailLogin.addData(interval.getNumMailLogins())
+            mailSites.addData(interval.getNumMailSites())
+            sshLogin.addData(interval.getNumSshLogins())
+            sshSites.addData(interval.getNumSshSites())
 
-    print "Average: %d interval average: %d" % (mailLogin.average(), mailLoginInterval.average())
+    #print "Mail Login Average: %d interval average: %d" % (mailLogin.average(), mailLoginInterval.average())
+    #print "Mail Site Average: %d interval average: %d" % (mailSites.average(), mailSitesInterval.average())
+    #print "Ssh Login Average: %d interval average: %d" % (sshLogin.average(), sshLoginInterval.average())
+    #print "Ssh Site Average: %d interval average: %d" % (sshSites.average(), sshSitesInterval.average())
     
     if mailLogin.average() > 0 and math.fabs(mailLoginInterval.average() - mailLogin.average()) > (2 * mailLogin.stddev()):
         print "Number of mail logins is outside of profile for %s: %d normal: %d" % (username, mailLoginInterval.average(), mailLogin.average())
+    if mailSites.average() > 0 and math.fabs(mailSitesInterval.average() - mailSites.average()) > (2 * mailSites.stddev()):
+        print "Number of mail sites is outside of profile for %s: %d normal: %d" % (username, mailSitesInterval.average(), mailSites.average())
+    if sshLogin.average() > 0 and math.fabs(sshLoginInterval.average() - sshLogin.average()) > (2 * sshLogin.stddev()):
+        print "Number of ssh logins is outside of profile for %s: %d normal: %d" % (username, sshLoginInterval.average(), sshLogin.average())
+    if sshSites.average() > 0 and math.fabs(sshSitesInterval.average() - sshSites.average()) > (2 * sshSites.stddev()):
+        print "Number of ssh sites is outside of profile for %s: %d normal: %d" % (username, sshSitesInterval.average(), sshSites.average())
 
 def loadData(datafile):
     if os.path.exists(datafile):
@@ -205,11 +228,7 @@ def main(argv=None):
         saveData(options.datafile)
     
     for username in getKnownUsers():
-        #print username
         analyzeData(username, intervalStart, intervalEnd)
-
-        #for day, interval in getIntervals(username).iteritems():
-        #    print "%s - %d" % (day, interval.getNumMailLogins())
         
 if __name__ == "__main__":
     sys.exit(main())
