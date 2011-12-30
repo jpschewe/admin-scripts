@@ -150,7 +150,7 @@ def processSshLog(intervalStart, intervalEnd, mailLog):
             interval = getInterval(match.group('user'), logentry_date)
             interval.addSshLogin(match.group('ip'))
 
-def analyzeData(username, intervalStart, intervalEnd):
+def analyzeData(username, intervalStart, intervalEnd, verbose):
     mailLogin = Stats()
     mailLoginInterval = Stats()
     mailSites = Stats()
@@ -160,9 +160,9 @@ def analyzeData(username, intervalStart, intervalEnd):
     sshSites = Stats()
     sshSitesInterval = Stats()
 
-    #print username
+    if verbose:
+        print username
     for day, interval in getIntervals(username).iteritems():
-        #    print "%s - %d" % (day, interval.getNumMailLogins())
         if intervalStart <= day and day < intervalEnd:
             mailLoginInterval.addData(interval.getNumMailLogins())
             mailSitesInterval.addData(interval.getNumMailSites())
@@ -174,12 +174,13 @@ def analyzeData(username, intervalStart, intervalEnd):
             sshLogin.addData(interval.getNumSshLogins())
             sshSites.addData(interval.getNumSshSites())
 
-    #print "Mail Login Average: %d interval average: %d" % (mailLogin.average(), mailLoginInterval.average())
-    #print "Mail Site Average: %d interval average: %d" % (mailSites.average(), mailSitesInterval.average())
-    #print "Ssh Login Average: %d interval average: %d" % (sshLogin.average(), sshLoginInterval.average())
-    #print "Ssh Site Average: %d interval average: %d" % (sshSites.average(), sshSitesInterval.average())
-    
-    if mailLogin.average() > 0 and math.fabs(mailLoginInterval.average() - mailLogin.average()) > (2 * mailLogin.stddev()):
+    if verbose:
+        print "Mail Login Average: %d interval average: %d" % (mailLogin.average(), mailLoginInterval.average())
+        print "Mail Site Average: %d interval average: %d" % (mailSites.average(), mailSitesInterval.average())
+        print "Ssh Login Average: %d interval average: %d" % (sshLogin.average(), sshLoginInterval.average())
+        print "Ssh Site Average: %d interval average: %d" % (sshSites.average(), sshSitesInterval.average())
+
+    if outsideProfile(mailLogin.average(), mailLogin.stddev(), mailLoginInterval.average()):
         print "Number of mail logins is outside of profile for %s: %d normal: %d" % (username, mailLoginInterval.average(), mailLogin.average())
     if mailSites.average() > 0 and math.fabs(mailSitesInterval.average() - mailSites.average()) > (2 * mailSites.stddev()):
         print "Number of mail sites is outside of profile for %s: %d normal: %d" % (username, mailSitesInterval.average(), mailSites.average())
@@ -209,6 +210,7 @@ def main(argv=None):
     parser.add_option("-e", "--interval-end", dest="interval_end", help="End of interval to analyze [YYYYmmdd] (required)")
     parser.add_option("-d", "--data", dest="datafile", help="The datafile to store the data in and load from (required)")
     parser.add_option("-q", "--quiet", dest="quiet", action="store_true", help="Quiet output")
+    parser.add_option("-v", "--verbose", dest="verbose", action="store_true", help="Verbose output")
 
     (options, args) = parser.parse_args(argv)
     if not options.interval_begin:
@@ -240,7 +242,7 @@ def main(argv=None):
         saveData(options.datafile)
     
     for username in getKnownUsers():
-        analyzeData(username, intervalStart, intervalEnd)
+        analyzeData(username, intervalStart, intervalEnd, options.verbose)
         
 if __name__ == "__main__":
     sys.exit(main())
