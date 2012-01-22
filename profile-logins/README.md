@@ -5,6 +5,6 @@ then an error is signaled.
 
 TODO
 ====
-* add purge option to remove data for an interval when something happens
-    will skew the average and shouldn't be considered
-
+* Add purge option to remove data for a user over an interval when
+  something happens will skew the average and shouldn't be considered
+* Add option to display all profile data for a user
