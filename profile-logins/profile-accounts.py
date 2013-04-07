@@ -156,7 +156,7 @@ def outsideProfile(average, stddev, intervalAverage):
     '''
     if intervalAverage > 0 and average == 0:
         return True
-    elif average > 0 and math.fabs(intervalAverage - average) > (2 * stddev):
+    elif average > 0 and intervalAverage > average and intervalAverage - average > (3 * stddev):
         return True
     else:
         return False
