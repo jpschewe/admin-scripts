@@ -67,6 +67,9 @@ class IntervalInfo:
     def getNumMailLogins(self):
         return self.numMailLogins
 
+    def getMailSites(self):
+        return self.mailSites.keys();
+    
     def addSshLogin(self, site):
         #print "Adding ssh login to %s for %s" % (self.username, site)
         self.numSshLogins = self.numSshLogins + 1
@@ -80,6 +83,9 @@ class IntervalInfo:
 
     def getNumSshLogins(self):
         return self.numSshLogins
+
+    def getSshSites(self):
+        return self.sshSites.keys();
 
 intervals = {}
 def getIntervals(username):
@@ -165,40 +171,56 @@ def analyzeData(username, intervalStart, intervalEnd, verbose):
     mailLogin = Stats()
     mailLoginInterval = Stats()
     mailSites = Stats()
+    rawMailSites = set()
     mailSitesInterval = Stats()
+    rawMailSitesInterval = set()
     sshLogin = Stats()
     sshLoginInterval = Stats()
     sshSites = Stats()
+    rawSshSites = set()
     sshSitesInterval = Stats()
-
+    rawSshSitesInterval = set()
+    
     if verbose:
         print username
     for day, interval in getIntervals(username).iteritems():
         if intervalStart <= day and day < intervalEnd:
             mailLoginInterval.addData(interval.getNumMailLogins())
             mailSitesInterval.addData(interval.getNumMailSites())
+            rawMailSitesInterval = rawMailSitesInterval.union(interval.getMailSites())
             sshLoginInterval.addData(interval.getNumSshLogins())
             sshSitesInterval.addData(interval.getNumSshSites())
+            rawSshSitesInterval = rawSshSitesInterval.union(interval.getSshSites())
         else:
             mailLogin.addData(interval.getNumMailLogins())
             mailSites.addData(interval.getNumMailSites())
+            rawMailSites = rawMailSites.union(interval.getMailSites())
             sshLogin.addData(interval.getNumSshLogins())
             sshSites.addData(interval.getNumSshSites())
-
+            rawSshSites = rawSshSites.union(interval.getSshSites())
+            
     if verbose:
         print "Mail Login Average: %d interval average: %d" % (mailLogin.average(), mailLoginInterval.average())
         print "Mail Site Average: %d interval average: %d" % (mailSites.average(), mailSitesInterval.average())
+        print "Mail Sites {0}".format(" ".join(rawMailSites))
         print "Ssh Login Average: %d interval average: %d" % (sshLogin.average(), sshLoginInterval.average())
         print "Ssh Site Average: %d interval average: %d" % (sshSites.average(), sshSitesInterval.average())
+        print "Ssh Sites {0}".format(" ".join(rawSshSites))
 
     if outsideProfile(mailLogin.average(), mailLogin.stddev(), mailLoginInterval.average()):
         print "Number of mail logins is outside of profile for %s: %d normal: %d" % (username, mailLoginInterval.average(), mailLogin.average())
+
     if outsideProfile(mailSites.average(), mailSites.stddev(), mailSitesInterval.average()):
         print "Number of mail sites is outside of profile for %s: %d normal: %d" % (username, mailSitesInterval.average(), mailSites.average())
+        print "\tSites {0}".format(" ".join(rawMailSitesInterval))
+        
     if outsideProfile(sshLogin.average(), sshLogin.stddev(), sshLoginInterval.average()):
         print "Number of ssh logins is outside of profile for %s: %d normal: %d" % (username, sshLoginInterval.average(), sshLogin.average())
+        
     if outsideProfile(sshSites.average(), sshSites.stddev(), sshSitesInterval.average()):
         print "Number of ssh sites is outside of profile for %s: %d normal: %d" % (username, sshSitesInterval.average(), sshSites.average())
+        print "\tSites {0}".format(" ".join(rawSshSitesInterval))
+        
 
 def loadData(datafile):
     if os.path.exists(datafile):
