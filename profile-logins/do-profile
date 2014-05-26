@@ -18,7 +18,7 @@ dateFormat='%Y%m%d'
 logs=''
 for day in 0 1 2 3 4 5 6; do
     dayDate=$(date -d "${day} days ago" +${dateFormat})
-    dayLogs="/var/log/auth.log.${dayDate}* /var/log/mail.info-${dayDate}*"
+    dayLogs="/var/log/auth.log-${dayDate}* /var/log/mail.info-${dayDate}*"
     logs="${logs} ${dayLogs}"
 done
 
