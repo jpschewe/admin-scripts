@@ -7,6 +7,9 @@ import textwrap
 from email.MIMEText import MIMEText
 import smtplib
 import os.path
+import glob
+import gzip
+import os
 
 base_virus_dir='/var/lib/amavis/virusmails'
 
@@ -26,6 +29,7 @@ while not line == '':
   line = passwd_file.readline()
 passwd_file.close()
 
+
 class DroppedMessage:
   '''Information about a particular message that was dropped'''
   def __init__(self):
@@ -35,6 +39,7 @@ class DroppedMessage:
     self.reason = ""
     self.subject = ""
 
+    
 class BlockedMail:
   '''Container for all blocked mail to an email address'''
   def __init__(self):
@@ -43,6 +48,7 @@ class BlockedMail:
     self.spam = []
     self.other = []
 
+    
 def get_subject(filename):
   '''Get the subject from the message in filename'''
   f = open(os.path.join(base_virus_dir, filename))
@@ -59,32 +65,36 @@ def get_subject(filename):
   f.close()
   return subject
 
-def find_blocked_mail():
-  # open logfile
-  logfile = open(options.logfile)
 
-  done = False
-  while not done:
-    line = logfile.readline()
+def find_blocked_mail(blocked_mail, earliest_timestamp, f):
+  """
+  @param f the file object to read
+  @param blocked_mail hash of user to blocked mail, modified by this method
+  @param earliest_timestamp ignore blocked email before this time 
+  """
 
-    if line == '':
-      # hit EOF
-      done = True
-    else:
-      #line_match = re.search('(?P<date>[A-Z][a-z][a-z]\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}).*amavis\[\d+\].*Blocked (?P<reason>\w+).* <(?P<from>[^<>]+)> -> (?P<to><[^<>]+>)+, quarantine: (?P<filename>[^,]+), Message-ID:', line)
-      line_match = re.match(r'(?P<date>[A-Z][a-z][a-z]\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}).*amavis\[\d+\].*Blocked (?P<reason>\w+).* <(?P<from>[^<>]+)> -> (?P<to>(<[^<>]+>,?)+), quarantine: (?P<filename>[^,]+), Message-ID:', line)
-      if not line_match == None:
-        #print "Matched"
-        #print "to: " + line_match.group("to")
-        #print line
-        #print "date:", line_match.group("date"), "reason:", line_match.group("reason"), "from:", line_match.group("from"), "to:", line_match.group("to"), "filename:", line_match.group("filename")
-        dropped_message = DroppedMessage()
-        dropped_message.email_from = line_match.group("from")
-        dropped_message.filename = line_match.group("filename")
-        dropped_message.date = line_match.group("date")
-        dropped_message.reason = line_match.group("reason")
-        dropped_message.subject = get_subject(dropped_message.filename)
+  for line in f:
+    #line_match = re.search('(?P<date>[A-Z][a-z][a-z]\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}).*amavis\[\d+\].*Blocked (?P<reason>\w+).* <(?P<from>[^<>]+)> -> (?P<to><[^<>]+>)+, quarantine: (?P<filename>[^,]+), Message-ID:', line)
+    line_match = re.match(r'(?P<date>[A-Z][a-z][a-z]\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}).*amavis\[\d+\].*Blocked (?P<reason>\w+).* <(?P<from>[^<>]+)> -> (?P<to>(<[^<>]+>,?)+), quarantine: (?P<filename>[^,]+),', line)
+    if not line_match == None:
+      #print "Matched"
+      #print "to: " + line_match.group("to")
+      #print line
+      #print "date:", line_match.group("date"), "reason:", line_match.group("reason"), "from:", line_match.group("from"), "to:", line_match.group("to"), "filename:", line_match.group("filename")
+      dropped_message = DroppedMessage()
+      dropped_message.email_from = line_match.group("from")
+      dropped_message.filename = line_match.group("filename")
+      
+      dropped_message.reason = line_match.group("reason")
+      dropped_message.subject = get_subject(dropped_message.filename)
 
+      dropped_message.date = datetime.datetime.strptime(line_match.group("date"), '%b %d %H:%M:%S').replace(year=datetime.date.today().year)
+      
+      if dropped_message.date > datetime.datetime.now():
+        # handle beginning of the year
+        dropped_message.date = dropped_message.date.replace(year=(dropped_message.date.year - 1))
+        
+      if dropped_message.date >= earliest_timestamp:
         for email in line_match.group("to").lower().split(','):
           match = re.match(r'<?(?P<user>[^@]+)@', email)
           if not match:
@@ -106,24 +116,37 @@ def find_blocked_mail():
             blocked_mail[user].virus.append(dropped_message)
           else:
             blocked_mail[user].other.append(dropped_message)
-  logfile.close()
 
   
 if __name__ == "__main__":
   parser = OptionParser()
-  parser.add_option("-l", "--logfile", dest="logfile", help="logfile (required)")
+  parser.add_option("-l", "--logfile-pattern", dest="logfile_pattern", help="logfile_pattern (required, uses glob matching)")
+  parser.add_option("-h", "--hours", dest="hours", help="Number of hours to look back from now to find blocked mail. Defaults to 25", default=25)
   parser.add_option("-c", "--contact", dest="contact", help="contact for restoring mail (default: root)", default="root")
   parser.add_option("-d", "--debug", dest="debug", action="store_true", help="If set, don't send mail, only build the messages", default=False)
   (options, args) = parser.parse_args()
 
-  if options.logfile == None:
-    print "A logfile must be specified"
+  if options.logfile_pattern == None:
+    print "A logfile pattern must be specified"
     parser.print_help()
     sys.exit()
     
   blocked_mail = {}
-    
-  find_blocked_mail()
+
+  earliest_timestamp = datetime.datetime.now() - datetime.timedelta(hours=options.hours)
+  
+  for filename in glob.glob(options.logfile_pattern):
+    modtime = os.stat(filename).ST_MTIME
+    mod_timestamp = datetime.datetime.fromtimestamp(path.getmtime(modtime))
+
+    if mod_timestamp >= earliest_timestamp:
+      if re.search(r'\.gz$', filename):
+        with gzip.open(filename, 'rt') as f:
+          find_blocked_mail(blocked_mail, earliest_timestamp, f)
+      else:
+        with open(filename, 'r') as f:
+          find_blocked_mail(blocked_mail, earliest_timestamp, f)
+      
 
   smtp = smtplib.SMTP()
   smtp.connect()
