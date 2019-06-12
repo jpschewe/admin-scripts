@@ -121,7 +121,7 @@ def find_blocked_mail(blocked_mail, earliest_timestamp, f):
 if __name__ == "__main__":
   parser = OptionParser()
   parser.add_option("-l", "--logfile-pattern", dest="logfile_pattern", help="logfile_pattern (required, uses glob matching)")
-  parser.add_option("-h", "--hours", dest="hours", help="Number of hours to look back from now to find blocked mail. Defaults to 25", default=25)
+  parser.add_option("--hours", dest="hours", help="Number of hours to look back from now to find blocked mail. Defaults to 25", default=25)
   parser.add_option("-c", "--contact", dest="contact", help="contact for restoring mail (default: root)", default="root")
   parser.add_option("-d", "--debug", dest="debug", action="store_true", help="If set, don't send mail, only build the messages", default=False)
   (options, args) = parser.parse_args()
