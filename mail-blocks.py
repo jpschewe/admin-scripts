@@ -10,6 +10,7 @@ import os.path
 import glob
 import gzip
 import os
+import datetime
 
 base_virus_dir='/var/lib/amavis/virusmails'
 
@@ -136,8 +137,8 @@ if __name__ == "__main__":
   earliest_timestamp = datetime.datetime.now() - datetime.timedelta(hours=options.hours)
   
   for filename in glob.glob(options.logfile_pattern):
-    modtime = os.stat(filename).ST_MTIME
-    mod_timestamp = datetime.datetime.fromtimestamp(path.getmtime(modtime))
+    modtime = os.stat(filename).st_mtime
+    mod_timestamp = datetime.datetime.fromtimestamp(modtime)
 
     if mod_timestamp >= earliest_timestamp:
       if re.search(r'\.gz$', filename):
@@ -160,12 +161,13 @@ if __name__ == "__main__":
     mail_body = ""
     mail_body += "\n".join(textwrap.wrap("This is a digest of the mail blocked for your email account over the past 24 hours.  Each line contains the date the messages was recived, the email address it was sent from, then subject and the filename where the message is quarantined.  If you would like the message recovered, contact " + options.contact + " with the name line indicating which message to recover.  All blocked messages will be deleted after 30 days.  In most cases you can just ignore these messages, however this digest is sent out in case messages are incorrectly blocked."))
     mail_body += "\n\n"
+
     if len(blocked_mail.virus) > 0:
       line = "Mails blocked for viruses\n"
       mail_body += line
       summary_mail_body += line
       for message in blocked_mail.virus:
-        line = "  " + message.date + " " + message.email_from + "\t" + message.subject + "\t" + message.filename + "\n"
+        line = "  " + message.date.strftime("%c") + " " + message.email_from + "\t" + message.subject + "\t" + message.filename + "\n"
         mail_body += line
         summary_mail_body += line
     if len(blocked_mail.spam) > 0:
@@ -173,7 +175,7 @@ if __name__ == "__main__":
       mail_body += line
       summary_mail_body += line
       for message in blocked_mail.spam:
-        line = "  " + message.date + " " + message.email_from + "\t" + message.subject + "\t" + message.filename + "\n"
+        line = "  " + message.date.strftime("%c") + " " + message.email_from + "\t" + message.subject + "\t" + message.filename + "\n"
         mail_body += line
         summary_mail_body += line
     if len(blocked_mail.other) > 0:
@@ -181,7 +183,7 @@ if __name__ == "__main__":
       mail_body += line
       summary_mail_body += line
       for message in blocked_mail.other:
-        line = "  " + message.date + " " + message.email_from + "\t" + message.subject + "\t" + message.filename + "\t" + message.reason + "\n"
+        line = "  " + message.date.strftime("%c") + " " + message.email_from + "\t" + message.subject + "\t" + message.filename + "\t" + message.reason + "\n"
         mail_body += line
         summary_mail_body += line
 

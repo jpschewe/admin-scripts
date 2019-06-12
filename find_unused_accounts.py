@@ -2,7 +2,8 @@
 
 import re
 from datetime import *
-from finger import finger
+#from finger import finger
+import subprocess
 import sys
 
 MONTH2NUM = {'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6, 'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12}
@@ -70,6 +71,10 @@ def get_last_read_mail(finger_result):
         sys.exit(1)
         return
 
+def finger(user):
+    result = subprocess.check_output(["finger", user])
+    return result
+    
 def main():
     compare_diff = timedelta(60)
     pass_file = open('/etc/passwd', 'r')
@@ -78,7 +83,7 @@ def main():
         fields = line.split(':')
         if re.match('/home', fields[5]):
             user = fields[0]
-            finger_result = finger('', user)
+            finger_result = finger(user)
             last_login = get_last_login(finger_result)
             if last_login:
                 login_diff = datetime.now() - last_login
