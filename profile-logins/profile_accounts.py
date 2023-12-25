@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import warnings
 with warnings.catch_warnings():
@@ -7,12 +7,13 @@ with warnings.catch_warnings():
     from datetime import datetime
     import re
     import time
-    import pickle
-    import os.path
     import math
     import gzip
+    from pathlib import Path
+    import csv
 
 DATE_FORMAT = '%Y%m%d'
+DATETIME_FORMAT='%Y-%m-%d %H:%M:%S'
 
 class Stats:
     '''
@@ -40,7 +41,7 @@ class Stats:
         else:
             average = self.average()
             return math.sqrt(1 / (self.count - 1) * (self.sumSquares - (self.count * average * average)))
-    
+
 class IntervalInfo:
     '''
     Information about a user for a given day.
@@ -54,10 +55,10 @@ class IntervalInfo:
         self.sshSites = {}
 
     def addMailLogin(self, site):
-        #print "Adding mail login to %s for %s" % (self.username, site)
+        #print("Adding mail login to %s for %s" % (self.username, site))
         self.numMailLogins = self.numMailLogins + 1
         if site in self.mailSites:
-            self.mailSites[site] = self.mailSites[site] + 1
+            self.mailSites[site] = int(self.mailSites[site]) + 1
         else:
             self.mailSites[site] = 1
 
@@ -69,12 +70,12 @@ class IntervalInfo:
 
     def getMailSites(self):
         return self.mailSites.keys();
-    
+
     def addSshLogin(self, site):
-        #print "Adding ssh login to %s for %s" % (self.username, site)
+        #print("Adding ssh login to %s for %s" % (self.username, site))
         self.numSshLogins = self.numSshLogins + 1
         if site in self.sshSites:
-            self.sshSites[site] = self.sshSites[site] + 1
+            self.sshSites[site] = int(self.sshSites[site]) + 1
         else:
             self.sshSites[site] = 1
 
@@ -87,7 +88,7 @@ class IntervalInfo:
     def getSshSites(self):
         return self.sshSites.keys();
 
-intervals = {}
+intervals = dict()
 def getIntervals(username):
     '''
     day -> IntervalInfo
@@ -109,10 +110,12 @@ def openFile(filename):
     '''
     If the file ends with ".gz", then open with gzip module, otherwise open directly
     '''
+    # encoding option to handle odd characters
+    # https://stackoverflow.com/questions/19699367/for-line-in-results-in-unicodedecodeerror-utf-8-codec-cant-decode-byte
     if filename.endswith('.gz'):
-        return gzip.open(filename, 'rb')
+        return gzip.open(filename, 'rt', encoding = "ISO-8859-1")
     else:
-        return file(filename)
+        return open(filename, encoding = "ISO-8859-1")
     
 def processMailLog(intervalStart, intervalEnd, mailLog):
     for line in openFile(mailLog):
@@ -182,8 +185,8 @@ def analyzeData(username, intervalStart, intervalEnd, verbose):
     rawSshSitesInterval = set()
     
     if verbose:
-        print username
-    for day, interval in getIntervals(username).iteritems():
+        print(username)
+    for day, interval in getIntervals(username).items():
         if intervalStart <= day and day < intervalEnd:
             mailLoginInterval.addData(interval.getNumMailLogins())
             mailSitesInterval.addData(interval.getNumMailSites())
@@ -200,39 +203,68 @@ def analyzeData(username, intervalStart, intervalEnd, verbose):
             rawSshSites = rawSshSites.union(interval.getSshSites())
             
     if verbose:
-        print "Mail Login Average: %d interval average: %d" % (mailLogin.average(), mailLoginInterval.average())
-        print "Mail Site Average: %d interval average: %d" % (mailSites.average(), mailSitesInterval.average())
-        print "Mail Sites {0}".format(" ".join(rawMailSites))
-        print "Ssh Login Average: %d interval average: %d" % (sshLogin.average(), sshLoginInterval.average())
-        print "Ssh Site Average: %d interval average: %d" % (sshSites.average(), sshSitesInterval.average())
-        print "Ssh Sites {0}".format(" ".join(rawSshSites))
+        print("Mail Login Average: %d interval average: %d" % (mailLogin.average(), mailLoginInterval.average()))
+        print("Mail Site Average: %d interval average: %d" % (mailSites.average(), mailSitesInterval.average()))
+        print("Mail Sites {0}".format(" ".join(rawMailSites)))
+        print("Ssh Login Average: %d interval average: %d" % (sshLogin.average(), sshLoginInterval.average()))
+        print("Ssh Site Average: %d interval average: %d" % (sshSites.average(), sshSitesInterval.average()))
+        print("Ssh Sites {0}".format(" ".join(rawSshSites)))
 
     if outsideProfile(mailLogin.average(), mailLogin.stddev(), mailLoginInterval.average()):
-        print "Number of mail logins is outside of profile for %s: %d normal: %d" % (username, mailLoginInterval.average(), mailLogin.average())
+        print("Number of mail logins is outside of profile for %s: %d normal: %d" % (username, mailLoginInterval.average(), mailLogin.average()))
 
     if outsideProfile(mailSites.average(), mailSites.stddev(), mailSitesInterval.average()):
-        print "Number of mail sites is outside of profile for %s: %d normal: %d" % (username, mailSitesInterval.average(), mailSites.average())
-        print "\tSites {0}".format(" ".join(rawMailSitesInterval))
+        print("Number of mail sites is outside of profile for %s: %d normal: %d" % (username, mailSitesInterval.average(), mailSites.average()))
+        print("\tSites {0}".format(" ".join(rawMailSitesInterval)))
         
     if outsideProfile(sshLogin.average(), sshLogin.stddev(), sshLoginInterval.average()):
-        print "Number of ssh logins is outside of profile for %s: %d normal: %d" % (username, sshLoginInterval.average(), sshLogin.average())
+        print("Number of ssh logins is outside of profile for %s: %d normal: %d" % (username, sshLoginInterval.average(), sshLogin.average()))
         
     if outsideProfile(sshSites.average(), sshSites.stddev(), sshSitesInterval.average()):
-        print "Number of ssh sites is outside of profile for %s: %d normal: %d" % (username, sshSitesInterval.average(), sshSites.average())
-        print "\tSites {0}".format(" ".join(rawSshSitesInterval))
+        print("Number of ssh sites is outside of profile for %s: %d normal: %d" % (username, sshSitesInterval.average(), sshSites.average()))
+        print("\tSites {0}".format(" ".join(rawSshSitesInterval)))
         
 
+
+def decode_dict(s):
+    if s and len(s) > 0:
+        return {x.split('_')[0]: x.split('_')[1] for x in s.split(';')}
+    return dict()
+
+
+def encode_dict(d):
+    return ';'.join(['%s_%s' % (k, v) for k,v in d.items()])
+     
+
 def loadData(datafile):
-    if os.path.exists(datafile):
-        f = file(datafile)
-        i = pickle.load(f)
-        f.close()
-        intervals.update(i)
+    path = Path(datafile)
+    if path.exists():
+        with open(path) as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                username = row['user']
+                date = datetime.strptime(row['date'], DATETIME_FORMAT)
+                interval = IntervalInfo(username, date)
+                interval.numMailLogins = int(row['numMailLogins'])
+                interval.mailSites = decode_dict(row['mailSites'])
+                interval.numSshLogins = int(row['numSshLogins'])
+                interval.sshSites = decode_dict(row['sshSites'])
+
+                user_data = intervals.get(username, dict())
+                user_data[date] = interval
+                intervals[username] = user_data
+
 
 def saveData(datafile):
-    output = file(datafile, 'w')
-    pickle.dump(intervals, output, 2)
-    output.close()
+    with open(datafile, 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(['user', 'date', 'numMailLogins', 'mailSites', 'numSshLogins', 'sshSites'])
+        for user, user_data in intervals.items():
+            for d, interval in user_data.items():
+                mail_str = ';'.join(['%s_%s' % (k, v) for k,v in interval.mailSites.items()])
+                ssh_str = ';'.join(['%s_%s' % (k,v) for k,v in interval.sshSites.items()])
+                writer.writerow([user, datetime.strftime(d, DATETIME_FORMAT), interval.numMailLogins, mail_str, interval.numSshLogins, ssh_str])
+
 
 def main(argv=None):
     if argv is None:
@@ -247,15 +279,15 @@ def main(argv=None):
 
     (options, args) = parser.parse_args(argv)
     if not options.interval_begin:
-        print "Interval begin must be specified"
+        print("Interval begin must be specified")
         parser.print_help()
         sys.exit(1)
     if not options.interval_end:
-        print "Interval end must be specified"
+        print("Interval end must be specified")
         parser.print_help()
         sys.exit(1)
     if not options.datafile:
-        print "Datafile must be specified"
+        print("Datafile must be specified")
         parser.print_help()
         sys.exit(1)
 
@@ -264,7 +296,7 @@ def main(argv=None):
     intervalStart = datetime.strptime(options.interval_begin, DATE_FORMAT)
     intervalEnd = datetime.strptime(options.interval_end, DATE_FORMAT)
     if not options.quiet:
-        print "Processing over interval [%s, %s)" % (intervalStart, intervalEnd)
+        print("Processing over interval [%s, %s)" % (intervalStart, intervalEnd))
 
     if args:
         for log in args:
@@ -273,10 +305,10 @@ def main(argv=None):
 
     if args:
         saveData(options.datafile)
-    
+
     for username in getKnownUsers():
         analyzeData(username, intervalStart, intervalEnd, options.verbose)
-        
+
 if __name__ == "__main__":
     sys.exit(main())
     

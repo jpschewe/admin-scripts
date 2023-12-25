@@ -78,10 +78,10 @@ def find_blocked_mail(blocked_mail, earliest_timestamp, f):
     #line_match = re.search('(?P<date>[A-Z][a-z][a-z]\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}).*amavis\[\d+\].*Blocked (?P<reason>\w+).* <(?P<from>[^<>]+)> -> (?P<to><[^<>]+>)+, quarantine: (?P<filename>[^,]+), Message-ID:', line)
     line_match = re.match(r'(?P<date>[A-Z][a-z][a-z]\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}).*amavis\[\d+\].*Blocked (?P<reason>\w+).* <(?P<from>[^<>]+)> -> (?P<to>(<[^<>]+>,?)+), quarantine: (?P<filename>[^,]+),', line)
     if not line_match == None:
-      #print "Matched"
-      #print "to: " + line_match.group("to")
-      #print line
-      #print "date:", line_match.group("date"), "reason:", line_match.group("reason"), "from:", line_match.group("from"), "to:", line_match.group("to"), "filename:", line_match.group("filename")
+      #print("Matched")
+      #print("to: " + line_match.group("to"))
+      #print(line)
+      #print("date:", line_match.group("date"), "reason:", line_match.group("reason"), "from:", line_match.group("from"), "to:", line_match.group("to"), "filename:", line_match.group("filename"))
       dropped_message = DroppedMessage()
       dropped_message.email_from = line_match.group("from")
       dropped_message.filename = line_match.group("filename")
@@ -102,9 +102,9 @@ def find_blocked_mail(blocked_mail, earliest_timestamp, f):
             continue
           user = match.group("user")
           #user = email.split('@')[0]
-          #print "user #" + user + "#"
+          #print("user #" + user + "#")
           if not re.match("[A-Z0-9._%-]+", user, re.IGNORECASE):
-            #print "Invalid user found in to list", user, ", skipping"
+            #print("Invalid user found in to list", user, ", skipping")
             continue
 
           if not blocked_mail.has_key(user):
@@ -128,7 +128,7 @@ if __name__ == "__main__":
   (options, args) = parser.parse_args()
 
   if options.logfile_pattern == None:
-    print "A logfile pattern must be specified"
+    print("A logfile pattern must be specified")
     parser.print_help()
     sys.exit()
     
@@ -194,19 +194,19 @@ if __name__ == "__main__":
     msg['To'] = blocked_mail.email
 
     if options.debug:
-      print msg
+      print(msg)
     else:
       try:
         smtp.sendmail(options.contact, [blocked_mail.email], msg.as_string())
       except: 
-        print "Error sending message to %s, will continue with next recipient" % (blocked_mail.email)
+        print("Error sending message to %s, will continue with next recipient" % (blocked_mail.email))
     
   #summary msg = MIMEText(summary_mail_body)
   #summary msg['Subject'] = 'Summary Digest of blocked email on mtu.net'
   #summary msg['From'] = options.contact
   #summary msg['To'] = options.contact
   #summary if options.debug:
-  #summary   print msg
+  #summary   print(msg)
   #summary else:
   #summary   smtp.sendmail(options.contact, [options.contact], msg.as_string())
   
