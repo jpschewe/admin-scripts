@@ -22,7 +22,7 @@ dateFormat='%Y%m%d'
 #    logs="${logs} ${dayLogs}"
 #done
 
-${mydir}/profile-accounts.py \
+${mydir}/profile_accounts.py \
     -q \
     -d ${datafile} \
     -b $(date -d "6 days ago" +${dateFormat}) \

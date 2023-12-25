@@ -7,7 +7,6 @@ with warnings.catch_warnings():
     from datetime import datetime
     import re
     import time
-    import pickle
     import math
     import gzip
     from pathlib import Path
@@ -111,10 +110,12 @@ def openFile(filename):
     '''
     If the file ends with ".gz", then open with gzip module, otherwise open directly
     '''
+    # encoding option to handle odd characters
+    # https://stackoverflow.com/questions/19699367/for-line-in-results-in-unicodedecodeerror-utf-8-codec-cant-decode-byte
     if filename.endswith('.gz'):
-        return gzip.open(filename, 'rt')
+        return gzip.open(filename, 'rt', encoding = "ISO-8859-1")
     else:
-        return open(filename)
+        return open(filename, encoding = "ISO-8859-1")
     
 def processMailLog(intervalStart, intervalEnd, mailLog):
     for line in openFile(mailLog):
